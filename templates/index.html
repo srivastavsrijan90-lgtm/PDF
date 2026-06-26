@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PDF Studio — Beautiful PDF Toolkit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="aurora">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="orb orb-4"></div>
+  </div>
+  <div class="mesh"></div>
+  <div class="noise"></div>
+
+  <div class="deco-float deco-1" aria-hidden="true"></div>
+  <div class="deco-float deco-2" aria-hidden="true"></div>
+  <div class="deco-float deco-3" aria-hidden="true"></div>
+
+  <div class="app-shell">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-mark">
+          <svg viewBox="0 0 32 32" fill="none">
+            <rect width="32" height="32" rx="9" fill="url(#brandGrad)"/>
+            <path d="M10 9h8l5 5v11a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2V11a2 2 0 0 1 2-2z" fill="white" fill-opacity=".9"/>
+            <path d="M18 9v5h5" stroke="white" stroke-opacity=".5" stroke-width="1.2"/>
+            <line x1="11" y1="19" x2="21" y2="19" stroke="#6c5ce7" stroke-width="2" stroke-linecap="round"/>
+            <defs>
+              <linearGradient id="brandGrad" x1="0" y1="0" x2="32" y2="32">
+                <stop stop-color="#7c6df0"/>
+                <stop offset="1" stop-color="#00cec9"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div>
+          <h1 class="brand-name">PDF Studio</h1>
+          <span class="brand-sub">Pro toolkit</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav" id="toolNav">
+        <button class="nav-item active" data-tool="merge" data-color="violet">
+          <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg></span>
+          <span class="nav-label">Merge</span>
+        </button>
+        <button class="nav-item" data-tool="split" data-color="rose">
+          <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M8 3H3v5M3 16v5h5M21 16v5h-5"/><line x1="12" y1="3" x2="12" y2="21"/></svg></span>
+          <span class="nav-label">Split</span>
+        </button>
+        <button class="nav-item" data-tool="rotate" data-color="cyan">
+          <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-3-6.7"/><polyline points="21 3 21 9 15 9"/></svg></span>
+          <span class="nav-label">Rotate</span>
+        </button>
+        <button class="nav-item" data-tool="compress" data-color="amber">
+          <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 14h6v6H4zM14 14h6v6h-6zM4 4h6v6H4zM14 10V4h6v6h-6z"/></svg></span>
+          <span class="nav-label">Compress</span>
+        </button>
+        <button class="nav-item" data-tool="extract-text" data-color="emerald">
+          <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg></span>
+          <span class="nav-label">Extract Text</span>
+        </button>
+        <button class="nav-item" data-tool="watermark" data-color="blue">
+          <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></span>
+          <span class="nav-label">Watermark</span>
+        </button>
+        <button class="nav-item" data-tool="reorder" data-color="pink">
+          <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 16V4M7 4L3 8M7 4l4 4M17 8v12M17 20l4-4M17 20l-4-4"/></svg></span>
+          <span class="nav-label">Reorder</span>
+        </button>
+        <button class="nav-item" data-tool="images-to-pdf" data-color="orange">
+          <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></span>
+          <span class="nav-label">Images → PDF</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <span class="theme-icon theme-icon-sun">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          </span>
+          <span class="theme-icon theme-icon-moon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </span>
+          <span class="theme-label">Light mode</span>
+        </button>
+        <div class="trust-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span>Files stay on your server</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="content">
+      <header class="content-header">
+        <div class="header-text">
+          <p class="eyebrow">All-in-one PDF workspace</p>
+          <h2 class="page-title" id="pageTitle">Merge PDFs</h2>
+          <p class="page-desc" id="pageDesc">Combine multiple PDF files into a single document</p>
+        </div>
+        <div class="header-actions">
+          <button class="theme-toggle theme-toggle-mobile" id="themeToggleMobile" aria-label="Toggle theme">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/></svg>
+          </button>
+          <div class="header-badges">
+            <span class="badge">8 Tools</span>
+            <span class="badge badge-accent">Free</span>
+            <span class="badge">50 MB</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="stats-strip">
+        <div class="stat-card">
+          <div class="stat-icon stat-icon-violet">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <div>
+            <strong>Instant</strong>
+            <span>Process in seconds</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon stat-icon-emerald">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <div>
+            <strong>Private</strong>
+            <span>No cloud upload</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon stat-icon-cyan">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4"/></svg>
+          </div>
+          <div>
+            <strong>Simple</strong>
+            <span>Drag &amp; drop</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="workspace-wrap" id="workspaceWrap">
+        <div class="workspace-border"></div>
+        <div class="workspace glass" id="workspace">
+        <!-- Merge -->
+        <section class="tool-panel active" id="panel-merge" data-accent="violet">
+          <div class="dropzone" id="dropzone-merge" data-multiple="true" data-accept=".pdf">
+            <div class="dropzone-inner">
+              <div class="upload-illustration">
+                <div class="upload-ring"></div>
+                <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="17 8 12 3 7 8"/>
+                  <line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+              </div>
+              <p class="dropzone-title">Drop your PDF files here</p>
+              <p class="dropzone-hint">or <span class="link-text">browse files</span> · Select 2 or more PDFs</p>
+            </div>
+            <input type="file" accept=".pdf" multiple hidden>
+          </div>
+          <ul class="file-list" id="filelist-merge"></ul>
+          <button class="btn-primary" id="btn-merge" disabled>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+            Merge PDFs
+          </button>
+        </section>
+
+        <!-- Split -->
+        <section class="tool-panel" id="panel-split" data-accent="rose">
+          <div class="dropzone" id="dropzone-split" data-multiple="false" data-accept=".pdf">
+            <div class="dropzone-inner">
+              <div class="upload-illustration">
+                <div class="upload-ring"></div>
+                <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="17 8 12 3 7 8"/>
+                  <line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+              </div>
+              <p class="dropzone-title">Drop a PDF file here</p>
+              <p class="dropzone-hint">or <span class="link-text">browse files</span></p>
+            </div>
+            <input type="file" accept=".pdf" hidden>
+          </div>
+          <ul class="file-list" id="filelist-split"></ul>
+          <div class="form-group">
+            <label for="ranges">Page ranges <span class="label-hint">e.g. 1-3, 5, 7-9</span></label>
+            <input type="text" id="ranges" placeholder="1-3, 5, 7-9" value="1">
+          </div>
+          <button class="btn-primary" id="btn-split" disabled>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M8 3H3v5"/></svg>
+            Split PDF
+          </button>
+        </section>
+
+        <!-- Rotate -->
+        <section class="tool-panel" id="panel-rotate" data-accent="cyan">
+          <div class="dropzone" id="dropzone-rotate" data-multiple="false" data-accept=".pdf">
+            <div class="dropzone-inner">
+              <div class="upload-illustration">
+                <div class="upload-ring"></div>
+                <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="17 8 12 3 7 8"/>
+                  <line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+              </div>
+              <p class="dropzone-title">Drop a PDF file here</p>
+              <p class="dropzone-hint">or <span class="link-text">browse files</span></p>
+            </div>
+            <input type="file" accept=".pdf" hidden>
+          </div>
+          <ul class="file-list" id="filelist-rotate"></ul>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Rotation angle</label>
+              <div class="btn-group" id="rotationGroup">
+                <button class="btn-option active" data-value="90">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-3-6.7"/><polyline points="21 3 21 9 15 9"/></svg>
+                  90° CW
+                </button>
+                <button class="btn-option" data-value="180">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
+                  180°
+                </button>
+                <button class="btn-option" data-value="270">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L21 16"/><polyline points="21 21 21 16 16 16"/></svg>
+                  90° CCW
+                </button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="rotate-pages">Pages <span class="label-hint">empty = all</span></label>
+              <input type="text" id="rotate-pages" placeholder="e.g. 1, 3-5">
+            </div>
+          </div>
+          <button class="btn-primary" id="btn-rotate" disabled>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-3-6.7"/></svg>
+            Rotate PDF
+          </button>
+        </section>
+
+        <!-- Compress -->
+        <section class="tool-panel" id="panel-compress" data-accent="amber">
+          <div class="dropzone" id="dropzone-compress" data-multiple="false" data-accept=".pdf">
+            <div class="dropzone-inner">
+              <div class="upload-illustration">
+                <div class="upload-ring"></div>
+                <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="17 8 12 3 7 8"/>
+                  <line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+              </div>
+              <p class="dropzone-title">Drop a PDF file here</p>
+              <p class="dropzone-hint">or <span class="link-text">browse files</span></p>
+            </div>
+            <input type="file" accept=".pdf" hidden>
+          </div>
+          <ul class="file-list" id="filelist-compress"></ul>
+          <button class="btn-primary" id="btn-compress" disabled>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 14h6v6H4zM14 14h6v6h-6z"/></svg>
+            Compress PDF
+          </button>
+        </section>
+
+        <!-- Extract Text -->
+        <section class="tool-panel" id="panel-extract-text" data-accent="emerald">
+          <div class="dropzone" id="dropzone-extract-text" data-multiple="false" data-accept=".pdf">
+            <div class="dropzone-inner">
+              <div class="upload-illustration">
+                <div class="upload-ring"></div>
+                <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="17 8 12 3 7 8"/>
+                  <line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+              </div>
+              <p class="dropzone-title">Drop a PDF file here</p>
+              <p class="dropzone-hint">or <span class="link-text">browse files</span></p>
+            </div>
+            <input type="file" accept=".pdf" hidden>
+          </div>
+          <ul class="file-list" id="filelist-extract-text"></ul>
+          <button class="btn-primary" id="btn-extract-text" disabled>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12"/></svg>
+            Extract Text
+          </button>
+        </section>
+
+        <!-- Watermark -->
+        <section class="tool-panel" id="panel-watermark" data-accent="blue">
+          <div class="dropzone" id="dropzone-watermark" data-multiple="false" data-accept=".pdf">
+            <div class="dropzone-inner">
+              <div class="upload-illustration">
+                <div class="upload-ring"></div>
+                <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="17 8 12 3 7 8"/>
+                  <line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+              </div>
+              <p class="dropzone-title">Drop a PDF file here</p>
+              <p class="dropzone-hint">or <span class="link-text">browse files</span></p>
+            </div>
+            <input type="file" accept=".pdf" hidden>
+          </div>
+          <ul class="file-list" id="filelist-watermark"></ul>
+          <div class="form-group">
+            <label for="watermark-text">Watermark text</label>
+            <input type="text" id="watermark-text" placeholder="CONFIDENTIAL" value="CONFIDENTIAL">
+          </div>
+          <button class="btn-primary" id="btn-watermark" disabled>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+            Add Watermark
+          </button>
+        </section>
+
+        <!-- Reorder -->
+        <section class="tool-panel" id="panel-reorder" data-accent="pink">
+          <div class="dropzone" id="dropzone-reorder" data-multiple="false" data-accept=".pdf">
+            <div class="dropzone-inner">
+              <div class="upload-illustration">
+                <div class="upload-ring"></div>
+                <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="17 8 12 3 7 8"/>
+                  <line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+              </div>
+              <p class="dropzone-title">Drop a PDF file here</p>
+              <p class="dropzone-hint">or <span class="link-text">browse files</span></p>
+            </div>
+            <input type="file" accept=".pdf" hidden>
+          </div>
+          <ul class="file-list" id="filelist-reorder"></ul>
+          <div class="form-group">
+            <label for="page-order">New page order <span class="label-hint">e.g. 3,1,2,4</span></label>
+            <input type="text" id="page-order" placeholder="3, 1, 2, 4">
+          </div>
+          <button class="btn-primary" id="btn-reorder" disabled>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 16V4M17 8v12"/></svg>
+            Reorder Pages
+          </button>
+        </section>
+
+        <!-- Images to PDF -->
+        <section class="tool-panel" id="panel-images-to-pdf" data-accent="orange">
+          <div class="dropzone" id="dropzone-images-to-pdf" data-multiple="true" data-accept="image/*">
+            <div class="dropzone-inner">
+              <div class="upload-illustration">
+                <div class="upload-ring"></div>
+                <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="3" y="3" width="18" height="18" rx="2"/>
+                  <circle cx="8.5" cy="8.5" r="1.5"/>
+                  <path d="M21 15l-5-5L5 21"/>
+                </svg>
+              </div>
+              <p class="dropzone-title">Drop images here</p>
+              <p class="dropzone-hint">PNG, JPG, WEBP · <span class="link-text">browse files</span></p>
+            </div>
+            <input type="file" accept="image/*" multiple hidden>
+          </div>
+          <ul class="file-list" id="filelist-images-to-pdf"></ul>
+          <button class="btn-primary" id="btn-images-to-pdf" disabled>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+            Convert to PDF
+          </button>
+        </section>
+        </div>
+      </div>
+
+      <footer class="content-footer">
+        <p>Built with Flask &amp; pypdf · Crafted for speed &amp; privacy</p>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Mobile bottom nav -->
+  <nav class="mobile-nav" id="mobileNav">
+    <button class="mob-tab active" data-tool="merge" title="Merge">📎</button>
+    <button class="mob-tab" data-tool="split" title="Split">✂️</button>
+    <button class="mob-tab" data-tool="rotate" title="Rotate">🔄</button>
+    <button class="mob-tab" data-tool="compress" title="Compress">🗜️</button>
+    <button class="mob-tab mob-more" id="mobMore" title="More">•••</button>
+  </nav>
+
+  <div class="mob-sheet" id="mobSheet">
+    <div class="mob-sheet-backdrop" id="mobBackdrop"></div>
+    <div class="mob-sheet-panel">
+      <h3>More Tools</h3>
+      <button class="mob-sheet-item" data-tool="extract-text">📝 Extract Text</button>
+      <button class="mob-sheet-item" data-tool="watermark">💧 Watermark</button>
+      <button class="mob-sheet-item" data-tool="reorder">🔀 Reorder</button>
+      <button class="mob-sheet-item" data-tool="images-to-pdf">🖼️ Images → PDF</button>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loader-card">
+      <div class="loader-orbit">
+        <div class="loader-dot"></div>
+      </div>
+      <p class="loader-text">Processing your file</p>
+      <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
